@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Easily build and package your Node.js projects into standalone executables using Node's Self-Extracting Archive (SEA) feature",
   "devDependencies": {
     "@types/node": "^22.7.4",
     "ts-node": "^10.9.2",
