@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
+import crypto from 'crypto';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import {
@@ -132,7 +133,7 @@ const generateOutputExecutable = async (buildDir: string): Promise<void> => {
 
 const injectCodeToExecutable = async (buildDir: string): Promise<void> => {
   console.log('[Executable] Injecting code into "app.exe"...');
-  await commandExecutor.executeCommand(`npx postject ${path.join(process.env.TEMP || '', 'app.exe')} NODE_SEA_BLOB "${path.join(buildDir, 'app.blob')}" --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2`);
+  await commandExecutor.executeCommand(`npx postject ${path.join(process.env.TEMP || '', 'app.exe')} NODE_SEA_BLOB "${path.join(buildDir, 'app.blob')}" --sentinel-fuse NODE_SEA_FUSE_${crypto.randomBytes(16).toString('hex')}`);
 
   console.log('[Executable] Code injected.');
   fs.renameSync(path.join(process.env.TEMP || '', 'app.exe'), path.join(path.dirname(buildDir), 'app.exe'));
